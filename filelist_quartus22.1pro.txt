@@ -1,0 +1,12 @@
+adm/qenv.sh
+bin/jtagconfig
+bin/jtagd
+linux64/jtagconfig
+linux64/jtagd
+linux64/libccl_ver.so
+linux64/libgcc_s.so.1
+linux64/libgomp.so.1
+linux64/libjtag_client.so
+linux64/libjtag_hw_pli-blaster.so
+linux64/libstdc++.so.6
+linux64/pgm_parts.txt
