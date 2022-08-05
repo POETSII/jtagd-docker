@@ -17,7 +17,10 @@ echo "JTAGD=$JTAGD"
 strace -f -s999 -o $TRACEDIR/stjtagconfig $QUARTUS_ROOTDIR/bin/jtagconfig > $TRACEDIR/jtagconfig.log
 kill %1
 
-grep open $TRACEDIR/stjtagd  | grep -v ENOENT | grep -v resumed | grep $QUARTUS_ROOTDIR | perl -lne "print \$2 if /($QUARTUSDIR\/(.*)\")/i" > $TRACEDIR/filelist.txt
-grep open $TRACEDIR/stjtagconfig  | grep -v ENOENT | grep -v resumed | grep $QUARTUS_ROOTDIR | perl -lne "print \$2 if /($QUARTUSDIR\/(.*)\")/i" >> $TRACEDIR/filelist.txt
+grep -a open $TRACEDIR/stjtagd  | grep -v ENOENT | grep -v resumed | grep $QUARTUS_ROOTDIR | perl -lne "print \$2 if /($QUARTUSDIR\/(.*)\")/i" > $TRACEDIR/filelist.txt
+grep -a open $TRACEDIR/stjtagconfig  | grep -v ENOENT | grep -v resumed | grep $QUARTUS_ROOTDIR | perl -lne "print \$2 if /($QUARTUSDIR\/(.*)\")/i" >> $TRACEDIR/filelist.txt
+grep -a execve $TRACEDIR/stjtagd | cut -d '"' -f 2  | grep $QUARTUS_ROOTDIR | perl -lne "print \$2 if /($QUARTUSDIR\/(.*))/i" >> $TRACEDIR/filelist.txt
+grep -a execve $TRACEDIR/stjtagconfig | cut -d '"' -f 2 | grep $QUARTUS_ROOTDIR | perl -lne "print \$2 if /($QUARTUSDIR\/(.*))/i" >> $TRACEDIR/filelist.txt
 
-cat $TRACEDIR/filelist.txt | sort | uniq > $FILELIST
+
+cat $TRACEDIR/filelist.txt | sort | uniq | grep -v '/$' > $FILELIST
