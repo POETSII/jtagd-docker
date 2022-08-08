@@ -4,7 +4,7 @@
 # The list may differ depending on what JTAG deviecs you have plugged in.
 # Requires $QUARTUS_ROOTDIR to be set
 #
-# syntax: run_jtag_listfiles.sh <output_file_for_list>
+# syntax: trace_required_files.sh <output_file_for_list>
 
 FILELIST=$1
 QUARTUSDIR=$(basename $QUARTUS_ROOTDIR)
